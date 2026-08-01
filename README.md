@@ -10,8 +10,8 @@
 
 <table>
   <tr>
-    <td valign="top"><img src="./dhruv-ascii.svg" width="370" alt="ASCII portrait" /></td>
-    <td valign="top"><img src="./info-card.svg" width="490" alt="Info card" /></td>
+    <td valign="top"><img src="./dhruv-ascii.svg" width="230" alt="ASCII portrait" /></td>
+    <td valign="top"><img src="./info-card.svg" width="630" alt="Info card" /></td>
   </tr>
 </table>
 
