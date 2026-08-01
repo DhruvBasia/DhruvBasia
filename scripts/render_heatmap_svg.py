@@ -14,7 +14,7 @@ DATA = ROOT / "data" / "contributions.json"
 OUT = ROOT / "contrib-heatmap.svg"
 
 # --- palette -----------------------------------------------------------------
-PALETTE = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353", "#69f0a0"]
+PALETTE = ["#0e2119", "#0e4429", "#00752f", "#26a641", "#39d353", "#69f0a0"]
 BG = "#0d1117"
 BORDER = "#30363d"
 TEXT = "#7d8590"
@@ -60,12 +60,13 @@ def esc(s):
 
 
 def level_of(day, max_count):
-    """Promote the very best days to the neon top of the ramp."""
-    lvl = day["level"]
-    if lvl >= 4 and max_count and day["count"] >= max_count:
-        return 5
-    return lvl
-
+    """Scale colour against your OWN best day, not GitHub's absolute bands."""
+    if day["count"] <= 0:
+        return 0
+    if not max_count:
+        return day["level"]
+    share = day["count"] / max_count
+    return min(5, max(2, round(2 + share * 3)))
 
 def render(data):
     days = data["days"]
