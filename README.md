@@ -1,23 +1,49 @@
-## About Me
+<div align="center">
 
-**Artificial Intelligence & Data Science Student**
+<h3><code>dhruv@github ~ $ ./contributions.sh</code></h3>
 
-I create:  
-- AI-powered projects that (hopefully) don’t go rogue  
-- Data-driven insights that make sense... sometimes  
-- Automation tools because doing things manually is overrated  
+<img src="./contrib-heatmap.svg" width="860" alt="Contribution heatmap" />
 
-**Currently exploring:**  
-- Machine Learning, NLP, and Computer Vision  
-- Cloud and AI Deployment  
-- Micro-Doppler radar signals and futuristic tech  
+<br><br>
 
-**Fun fact:**  
-I talk to AI models more than humans—and they actually reply.
+<h3><code>dhruv@github ~ $ whoami</code></h3>
 
-## 🌐 Socials:
-[![Discord](https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white)](https://discord.gg/D.hruvv) 
+<table>
+  <tr>
+    <td valign="top"><img src="./dhruv-ascii.svg" width="370" alt="ASCII portrait" /></td>
+    <td valign="top"><img src="./info-card.svg" width="490" alt="Info card" /></td>
+  </tr>
+</table>
 
-[![](https://visitcount.itsvg.in/api?id=DamnDhruv&icon=0&color=0)](https://visitcount.itsvg.in)
+<br>
 
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+<h3><code>dhruv@github ~ $ ls -la ./projects</code></h3>
+
+<table>
+  <tr>
+    <td><a href="https://github.com/DhruvBasia/green-commute-tracker"><b>green-commute-tracker</b></a></td>
+    <td><code>JavaScript</code></td>
+    <td>Log trips, see the carbon you didn't burn</td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/DhruvBasia/Gesture-Scroller-for-Reels-Shorts"><b>gesture-scroller</b></a></td>
+    <td><code>Python</code></td>
+    <td>Scroll Reels and Shorts with a hand wave</td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/DhruvBasia/Weather-Machine-Learning-Project"><b>weather-ml</b></a></td>
+    <td><code>Jupyter</code></td>
+    <td>Forecasting from historical weather data</td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/DhruvBasia/Event-management-Website"><b>event-management</b></a></td>
+    <td><code>Web</code></td>
+    <td>Full-stack event listing and registration</td>
+  </tr>
+</table>
+
+<br>
+
+<sub><code>graph refreshed daily by a GitHub Action · art generated, not hosted</code></sub>
+
+</div>

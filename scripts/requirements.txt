@@ -1,0 +1,3 @@
+# Runtime deps -- this is all the daily GitHub Action needs.
+requests==2.32.3
+beautifulsoup4==4.12.3

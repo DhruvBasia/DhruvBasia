@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>profile art preview</title>
+<!-- Loads the SVGs through <img>, exactly the way GitHub does, so what you
+     see here is what the profile will do. Reload to replay the animation. -->
+<style>
+  body{background:#010409;color:#7d8590;font:13px ui-monospace,Menlo,monospace;
+       margin:0;padding:48px 16px;display:flex;flex-direction:column;
+       align-items:center;gap:10px}
+  h3{color:#c9d1d9;font-weight:600;margin:26px 0 10px}
+  code{color:#39d353}
+  table{border-spacing:0}
+  td{vertical-align:top;padding:0}
+  button{background:#21262d;color:#c9d1d9;border:1px solid #30363d;
+         border-radius:6px;padding:7px 14px;font:inherit;cursor:pointer}
+  button:hover{border-color:#39d353}
+</style>
+
+<button onclick="location.reload()">↻ replay</button>
+
+<h3><code>dhruv@github ~ $ ./contributions.sh</code></h3>
+<img src="./contrib-heatmap.svg" width="860">
+
+<h3><code>dhruv@github ~ $ whoami</code></h3>
+<table><tr>
+  <td><img src="./dhruv-ascii.svg" width="370"></td>
+  <td><img src="./info-card.svg" width="490"></td>
+</tr></table>

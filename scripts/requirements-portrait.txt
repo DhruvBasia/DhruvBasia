@@ -1,0 +1,7 @@
+# Portrait pipeline only. Heavy (opencv + onnx models) and needed ONLY when you
+# regenerate the ASCII art from a new photo -- never in CI.
+-r requirements.txt
+pillow>=10.0
+numpy>=1.26
+opencv-python-headless>=4.9
+rembg>=2.0.56
