@@ -113,6 +113,8 @@ def render(data):
         if mo in seen:
             continue
         seen.add(mo)
+        if wi == 0 and int(first["date"][8:10]) > 21:
+            continue
         x = GRID_X + wi * STEP
         if x + 26 > width - PAD:
             continue
