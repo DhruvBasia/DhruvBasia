@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Regenerate everything. Pass a photo to also rebuild the portrait:
-#   ./build.sh                 -> heatmap + info card
-#   ./build.sh me.jpg          -> heatmap + info card + ASCII portrait
+#   ./build.sh                 -> heatmap + info card + ASCII robot avatar
+#   ./build.sh me.jpg          -> same, but the ASCII card is your portrait
 set -euo pipefail
 cd "$(dirname "$0")"
 
