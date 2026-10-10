@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Draw the ASCII card that types itself: a robot avatar, or a photo portrait.
+"""Draw the ASCII card that types itself: Iron Man, or a photo portrait.
 
     python scripts/make_ascii_svg.py            # -> dhruv-ascii.svg
     STATIC=1 python scripts/make_ascii_svg.py   # frozen frame, for previewing
 
-No photo needed: without source-prepped.png the card is a robot avatar drawn
+No photo needed: without source-prepped.png the card is an Iron Man bust drawn
 from a handful of shapes, standard library only. Run prep_photo.py first and
 it becomes a portrait of that photo instead (that path needs pillow + numpy).
 
@@ -44,16 +44,43 @@ START = 0.2
 
 STATIC = os.environ.get("STATIC") == "1"
 
-# --- robot avatar ----------------------------------------------------------
+# --- avatar ----------------------------------------------------------------
 AVATAR_ROWS = 76
-CX = COLS * CHAR_W / 2        # the robot is laid out around the centre line
+CX = COLS * CHAR_W / 2        # the helmet is laid out around the centre line
 SUB_X, SUB_Y = 2, 3           # samples averaged per glyph, so edges stay smooth
+
+
+def mirror(half):
+    """Close a half outline, as (distance from centre line, y), into a polygon."""
+    return ([(CX + dx, y) for dx, y in half]
+            + [(CX - dx, y) for dx, y in reversed(half) if dx])
+
+
+HELMET = mirror([(0, 22), (52, 26), (92, 46), (114, 84), (122, 130), (122, 178),
+                 (116, 222), (104, 262), (78, 302), (46, 326), (0, 332)])
+FACEPLATE = mirror([(0, 74), (60, 72), (86, 98), (93, 150), (88, 196), (64, 216),
+                    (58, 262), (44, 300), (0, 306)])
+CHEST = mirror([(0, 358), (50, 354), (96, 368), (150, 394), (176, 430),
+                (180, 560), (0, 560)])
+EYE = [(13, 171.4), (13, 163), (72, 152), (79, 158), (75, 171.4)]  # x from centre
 
 
 def box(x, y, cx, cy, hx, hy, r=0.0):
     """Signed distance to a rounded rectangle: negative inside."""
     dx, dy = abs(x - cx) - hx + r, abs(y - cy) - hy + r
     return math.hypot(max(dx, 0.0), max(dy, 0.0)) + min(max(dx, dy), 0.0) - r
+
+
+def poly(x, y, pts):
+    """Signed distance to a polygon: negative inside."""
+    d2, inside = math.inf, False
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:] + pts[:1]):
+        ex, ey = x1 - x0, y1 - y0
+        t = clamp(((x - x0) * ex + (y - y0) * ey) / (ex * ex + ey * ey))
+        d2 = min(d2, (x - x0 - ex * t) ** 2 + (y - y0 - ey * t) ** 2)
+        if (y0 > y) != (y1 > y) and x < x0 + (y - y0) * ex / ey:
+            inside = not inside
+    return -math.sqrt(d2) if inside else math.sqrt(d2)
 
 
 def paint(v, d, fill, rim=None, t=6.0):
@@ -69,48 +96,40 @@ def clamp(v, lo=0.0, hi=1.0):
     return lo if v < lo else hi if v > hi else v
 
 
-def robot(x, y):
+def ironman(x, y):
     """Ink density, 0 (blank) to 1 (solid), at pixel (x, y) of the text area."""
+    ax = abs(x - CX)
+    lit = (CX - x) / 185 + (270 - y) / 270      # light falls from the top left
     v = 0.0
-    # antenna: a glowing ball on a stem
-    d = math.hypot(x - CX, y - 30) - 11
-    v = max(v, 0.5 * math.exp(-(max(d, 0.0) / 12) ** 2))
-    if d < 0:
-        v = 1.0
-    if abs(x - CX) < 3.2 and 41 <= y <= 76:
-        v = 0.7
-    # ears
-    for ex in (CX - 128, CX + 128):
-        v = paint(v, box(x, y, ex, 168, 9, 30, 5), 0.62)
-    # neck, banded
-    if box(x, y, CX, 278, 28, 16) < 0:
-        v = 0.62 if int(y / LINE_H) % 2 else 0.22
-    # torso, lit from the top left
-    lit = 0.30 + 0.13 * ((CX - x) / 160 + (380 - y) / 170)
-    v = paint(v, box(x, y, CX, 450, 160, 156, 52), clamp(lit, 0.14, 0.5), 0.86)
-    # chest light
-    d = math.hypot(x - CX, y - 407) - 26
-    v = paint(v, d, 0.0, 0.8, 5.0)
-    if d < -5.0:
-        e = math.hypot(x - CX, y - 407) - 9
-        v = max(v, 0.55 * math.exp(-(max(e, 0.0) / 7) ** 2))
-        if e < 0:
-            v = 1.0
-    # head
-    lit = 0.33 + 0.13 * ((CX - x) / 118 + (168 - y) / 94)
-    v = paint(v, box(x, y, CX, 168, 118, 94, 36), clamp(lit, 0.14, 0.55), 0.9)
-    # visor with two glowing eyes
-    d = box(x, y, CX, 150, 92, 42.8, 24)
-    v = paint(v, d, 0.0, 0.8, 5.0)
-    if d < -5.0:
-        for ex in (CX - 42, CX + 42):
-            e = math.hypot(x - ex, y - 150) - 19
-            v = max(v, 0.55 * math.exp(-(max(e, 0.0) / 9) ** 2))
+    if y > 320:
+        # neck
+        if box(x, y, CX, 346, 40, 22) < 0:
+            v = 0.2
+        # chest and shoulders
+        v = paint(v, poly(x, y, CHEST), clamp(0.36 + 0.06 * lit, 0.2, 0.5), 0.86)
+        # arc reactor: glow on the chest, then housing, ring and core
+        r = math.hypot(x - CX, y - 462)
+        if v:
+            v = max(v, 0.75 * math.exp(-(max(r - 30, 0.0) / 18) ** 2))
+        for radius, ink in ((30, 0.0), (25, 0.9), (18, 0.0), (13, 1.0)):
+            if r < radius:
+                v = ink
+    if y < 340:
+        # helmet shell
+        v = paint(v, poly(x, y, HELMET), clamp(0.32 + 0.10 * lit, 0.2, 0.5), 0.88)
+        # faceplate, with a dark seam just inside its edge
+        v = paint(v, poly(x, y, FACEPLATE),
+                  clamp(0.60 + 0.12 * lit, 0.5, 0.78), 0.0, 4.5)
+        # eyes: bright slits in dark sockets
+        if 135 < y < 195:
+            e = poly(ax, y, EYE)
+            if e < 6:
+                v = 0.0
             if e < 0:
                 v = 1.0
-    # mouth grille
-    if box(x, y, CX, 228.5, 46, 7, 3) < 0:
-        v = 0.95 if int((x - CX + 46) / (CHAR_W * 2)) % 2 == 0 else 0.1
+        # mouth slit
+        if box(x, y, CX, 260.6, 30, 3.6) < 0:
+            v = 0.0
     return v
 
 
@@ -120,7 +139,7 @@ def avatar_rows():
         line = []
         for c in range(COLS):
             acc = sum(
-                robot((c + (i + 0.5) / SUB_X) * CHAR_W,
+                ironman((c + (i + 0.5) / SUB_X) * CHAR_W,
                       (r + (j + 0.5) / SUB_Y) * LINE_H)
                 for j in range(SUB_Y) for i in range(SUB_X)
             )
@@ -220,7 +239,7 @@ def main():
         print(f"source: {SRC.name}")
     else:
         rows = avatar_rows()
-        print(f"no {SRC.name} -- drawing the robot avatar")
+        print(f"no {SRC.name} -- drawing Iron Man")
 
     OUT.write_text(render(rows), encoding="utf-8")
     print(f"wrote {OUT.name} ({COLS}x{len(rows)} chars"
