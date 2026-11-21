@@ -1,18 +1,18 @@
 {
   "username": "DhruvBasia",
-  "generated_at": "2026-11-20T15:31:35Z",
+  "generated_at": "2026-11-21T14:43:31Z",
   "range": {
     "from": "2025-11-16",
-    "to": "2026-11-20"
+    "to": "2026-11-21"
   },
-  "total": 203,
-  "active_days": 118,
+  "total": 204,
+  "active_days": 119,
   "max_count": 14,
   "best_day": {
     "date": "2026-08-01",
     "count": 14
   },
-  "current_streak": 14,
+  "current_streak": 15,
   "longest_streak": 96,
   "monthly": {
     "2025-11": 0,
@@ -27,7 +27,7 @@
     "2026-08": 45,
     "2026-09": 39,
     "2026-10": 66,
-    "2026-11": 38
+    "2026-11": 39
   },
   "days": [
     {
@@ -1877,6 +1877,11 @@
     },
     {
       "date": "2026-11-20",
+      "count": 1,
+      "level": 1
+    },
+    {
+      "date": "2026-11-21",
       "count": 0,
       "level": 0
     }
