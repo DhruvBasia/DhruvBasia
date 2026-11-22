@@ -1,18 +1,18 @@
 {
   "username": "DhruvBasia",
-  "generated_at": "2026-11-21T14:43:31Z",
+  "generated_at": "2026-11-22T14:39:20Z",
   "range": {
-    "from": "2025-11-16",
-    "to": "2026-11-21"
+    "from": "2025-11-23",
+    "to": "2026-11-22"
   },
-  "total": 204,
-  "active_days": 119,
+  "total": 206,
+  "active_days": 121,
   "max_count": 14,
   "best_day": {
     "date": "2026-08-01",
     "count": 14
   },
-  "current_streak": 15,
+  "current_streak": 17,
   "longest_streak": 96,
   "monthly": {
     "2025-11": 0,
@@ -27,44 +27,9 @@
     "2026-08": 45,
     "2026-09": 39,
     "2026-10": 66,
-    "2026-11": 39
+    "2026-11": 41
   },
   "days": [
-    {
-      "date": "2025-11-16",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-17",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-18",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-19",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-20",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-21",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-11-22",
-      "count": 0,
-      "level": 0
-    },
     {
       "date": "2025-11-23",
       "count": 0,
@@ -1882,8 +1847,13 @@
     },
     {
       "date": "2026-11-21",
-      "count": 0,
-      "level": 0
+      "count": 1,
+      "level": 1
+    },
+    {
+      "date": "2026-11-22",
+      "count": 1,
+      "level": 1
     }
   ]
 }
